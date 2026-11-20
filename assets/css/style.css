@@ -1,0 +1,691 @@
+:root {
+    --primary-color: #00d2ff;
+    --secondary-color: #3a7bd5;
+    --bg-color: #0a0a0a;
+    --text-color: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-family: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.lang-switch {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Nav Overlay */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        transform: translateY(-100%);
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+    }
+
+    .nav-links a {
+        font-size: 24px;
+    }
+
+    /* Hamburger Animation */
+    .hamburger.open .line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+
+    .hamburger.open .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open .line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Align left */
+    position: relative;
+    overflow: hidden;
+    padding-left: 10%;
+    /* Add spacing from left edge */
+}
+
+#canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-text {
+    text-align: left;
+    /* Text aligns left */
+    z-index: 1;
+    max-width: 500px;
+    /* Reduced width for separation */
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    /* Optional: backing */
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.hero-text h1 {
+    font-size: 4rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #ccc;
+}
+
+.cta-button {
+    padding: 15px 40px;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+}
+
+.cta-button:hover {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 20px var(--primary-color);
+}
+
+/* Common Section */
+section {
+    padding: 100px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+/* Glassmorphism */
+.glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+/* About */
+.about-section .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* Tech */
+.tech-section {
+    position: relative;
+}
+
+.section-desc {
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* CNN Diagram Styles */
+.cnn-diagram-wrapper {
+    background: rgba(10, 20, 40, 0.7);
+    /* Dark blue tint */
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.diagram-title {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Orbitron', sans-serif;
+    /* Tech font if available, fallback sans */
+    color: #fff;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+}
+
+.cnn-flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cnn-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 120px;
+}
+
+.cnn-label {
+    font-size: 0.7rem;
+    color: #88ccff;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.cnn-visual {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* 1. Input */
+.input-box {
+    border: 1px solid #00d2ff;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.input-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #00ff88;
+    box-shadow: 0 0 5px #00ff88;
+    animation: scan 2s infinite linear;
+}
+
+@keyframes scan {
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* Arrow */
+.cnn-arrow {
+    width: 30px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, #3a7bd5 0, #3a7bd5 4px, transparent 4px, transparent 8px);
+    opacity: 0.5;
+}
+
+/* 2. Conv Stack */
+.conv-stack {
+    perspective: 200px;
+}
+
+.layer {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(0, 210, 255, 0.6);
+    background: rgba(0, 100, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.1);
+}
+
+.c1 {
+    transform: translateZ(0px);
+}
+
+.c2 {
+    transform: translateZ(-20px) translateX(10px) translateY(-10px);
+}
+
+.c3 {
+    transform: translateZ(-40px) translateX(20px) translateY(-20px);
+}
+
+/* 3. Pooling */
+.pool-box {
+    width: 60px;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    border: 1px solid #9d4edd;
+    /* Purple */
+    padding: 2px;
+}
+
+.grid-cell {
+    background: rgba(157, 78, 221, 0.3);
+}
+
+.grid-cell:nth-child(1) {
+    background: rgba(157, 78, 221, 0.6);
+}
+
+/* Max highlight */
+
+/* 4. Conv 2 */
+.green-layer {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #00ff9d;
+    background: rgba(0, 255, 157, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
+    /* Outline effect */
+    outline: 4px double rgba(0, 255, 157, 0.1);
+    outline-offset: 4px;
+}
+
+/* 5. Dense */
+.dense-net {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80px;
+}
+
+.neuron-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+}
+
+.neuron-col span {
+    width: 6px;
+    height: 6px;
+    background: #e0aaff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #e0aaff;
+}
+
+.neuron-col.mid span {
+    background: #c77dff;
+}
+
+/* 6. Output */
+.output-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.circular-chart {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 2.5;
+}
+
+.circle {
+    fill: none;
+    stroke: #00ff88;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+    0% {
+        stroke-dasharray: 0, 100;
+    }
+}
+
+.percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.result-label {
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.6rem;
+    color: #00ff88;
+    letter-spacing: 1px;
+}
+
+.diagram-footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #ccc;
+    font-size: 0.9rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.photo-box {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.8;
+    transition: transform 0.3s;
+}
+
+.photo-box:hover img {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.accuracy {
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.accuracy span {
+    color: #00ff88;
+    /* Green for high accuracy */
+}
+
+/* Contact */
+.contact-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    text-align: center;
+}
+
+.person h3 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.person a {
+    font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+    padding: 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    color: #888;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .about-section .container,
+    .photo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Mobile Hero */
+    .hero-section {
+        justify-content: center;
+        /* Center text on mobile */
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        /* More darken on mobile for contrast */
+    }
+
+    /* Mobile CNN Diagram - Horizontal & Small */
+    .cnn-diagram-wrapper {
+        padding: 20px 5px;
+        overflow-x: auto;
+        /* Allow scroll if still too tight */
+    }
+
+    .cnn-flow {
+        flex-direction: row;
+        /* Keep horizontal */
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 5px;
+        transform: scale(0.7);
+        /* Scale down entire diagrams */
+        transform-origin: left top;
+        width: 140%;
+        /* Compensate scale */
+    }
+
+    .cnn-step {
+        width: 80px;
+        /* Smaller step width */
+        gap: 5px;
+    }
+
+    .cnn-visual {
+        width: 60px;
+        /* Small visuals */
+        height: 60px;
+    }
+
+    .cnn-label {
+        font-size: 0.5rem;
+        /* Tiny text */
+    }
+
+    .cnn-arrow {
+        width: 15px;
+        /* Short horizontal arrows */
+        height: 2px;
+        background: repeating-linear-gradient(90deg, #3a7bd5 0, #3a7bd5 2px, transparent 2px, transparent 4px);
+    }
+
+    /* Scale internal layers for mobile */
+    .layer,
+    .pool-box,
+    .green-layer {
+        width: 35px;
+        height: 35px;
+    }
+
+    .c2 {
+        transform: translateZ(-10px) translateX(5px) translateY(-5px);
+    }
+
+    .c3 {
+        transform: translateZ(-20px) translateX(10px) translateY(-10px);
+    }
+
+    .dense-net {
+        width: 40px;
+    }
+
+    .neuron-col span {
+        width: 4px;
+        height: 4px;
+    }
+
+    .output-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .percentage {
+        font-size: 0.7rem;
+    }
+}
